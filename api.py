@@ -70,6 +70,7 @@ def pos_tagging_algorithm(algorithm_name):
         members = [member[0] for member in inspect.getmembers(PosTaggers, predicate=inspect.ismethod) if member[0] 
                                             not in ["__init__", "to_unicode_or_bust"]]
 
+        print members
         if algorithm_name not in members:
                 raise StandardError("The algorithm you are trying to use for Pos Tagging  doesnt exists yet,\
                                     please try from these algorithms {0}".format(members))
@@ -157,7 +158,7 @@ def cors(func, allow_origin=None, allow_headers=None, max_age=None):
 class EateriesList(restful.Resource):
 	@cors
 	def get(self):
-		
+                time.sleep(30)
                 result = [{u'eatery_id': u'4114', u'eatery_name': u'Choko La'}, {u'eatery_id': u'820', u'eatery_name': u'Market Cafe'},
                     {u'eatery_id': u'304628', u'eatery_name': u'Prabhu Chaat Bhandar'}, {u'eatery_id': u'300656', u'eatery_name': u'Smoke House Deli'},
                     {u'eatery_id': u'4624', u'eatery_name': u'Le Marche - Sugar & Spice'}, {u'eatery_id': u'310000', u'eatery_name': u'Au Bon Pain'},]
@@ -171,7 +172,7 @@ class EateriesList(restful.Resource):
 class GetWordCloud(restful.Resource):
 	@cors
         def post(self):
-                time.sleep(30)
+                args = get_word_cloud_parser.parse_args()
                 return {"success": True,
 				"error": False,
 				"result": "some result",
